@@ -4,7 +4,7 @@ module instruction_memory (
     input load,
     input clk,
     input reset,
-    input logic [11:0] out
+    output logic [11:0] out
 );
 
 logic [11:0] memory [7:0];
@@ -31,7 +31,8 @@ always @(posedge clk) begin
         memory[6] <= memory[7];
         memory[7] <= new_instruction;
     end
-    out <= memory[index];
-end 
+end
+
+assign out = memory[index];
 
 endmodule

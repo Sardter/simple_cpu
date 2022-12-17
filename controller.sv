@@ -1,38 +1,3 @@
-typedef struct packed {
-    bit [3:0] index;
-    bit [3:0] write_data;
-    bit write_enable;
-    bit read_enable;
-    bit [3:0] read_data;
-} DM_data;
-
-typedef struct packed {
-    bit [2:0] read_address1; 
-    bit [2:0] read_address2;
-    bit [2:0] write_address;
-    bit [3:0] write_data;
-    bit write_enable;
-    bit swap_enable;
-    bit [3:0] read_data1;
-    bit [3:0] read_data2;
-} RF_data;
-
-
-typedef struct packed {
-    bit [3:0] a;
-    bit [3:0] b;
-    bit [3:0] result;
-    bit comparison;
-    bit operation;
-} ALU_data;
-
-typedef struct packed {
-    bit [2:0] index;
-    bit [11:0] new_instruction;
-    bit loading;
-    bit [11:0] out;
-} IM_data;
-
 module controller (
     input [11:0] external,
     input [3:0] external_reg_file_data,
@@ -46,17 +11,34 @@ module controller (
     output logic [3:0] display_out [3:0]
 );
 
-logic [2:0] PC;
-logic [11:0] IR;
+logic [2:0] PC = 0;
+logic [11:0] IR = 0;
 
-ALU_data alu_data;
-DM_data dm_data;
-RF_data rf_data;
-IM_data im_data;
+logic [3:0] dm_address;
+logic [3:0] dm_write_data;
+logic dm_write_enable;
+logic dm_read_enable;
+logic [3:0] dm_read_data;
+
+logic [2:0] rf_read_address1; 
+logic [2:0] rf_read_address2;
+logic [2:0] rf_write_address;
+logic [3:0] rf_write_data;
+logic rf_write_enable;
+logic [3:0] rf_read_data1;
+logic [3:0] rf_read_data2;
+
+logic [2:0] im_index;
+logic [11:0] im_new_instruction;
+logic im_loading;
+logic [11:0] im_out;
+
+
 
 logic [3:0] state;
 logic [2:0] sort_i, sort_j;
-logic is_executing, is_sort_writing;
+logic is_executing;
+logic [1:0] sort_condition;
 
 logic [3:0] temp_sort_mem [7:0];
 
@@ -90,72 +72,70 @@ parameter
     dis = 3'b110;
 
 instruction_memory IM(
-    im_data.index,
-    im_data.new_instruction,
-    im_data.loading,
+    im_index,
+    im_new_instruction,
+    im_loading,
     clk,
     reset,
-    im_data.out
-);
-ALU alu(
-    alu_data.a,
-    alu_data.b,
-    alu_data.operation,
-    alu_data.result,
-    alu_data.operation
+    im_out
 );
 data_memory DM(
-    dm_data.index, 
-    dm_data.write_data, 
-    dm_data.write_enable, 
-    dm_data.read_enable,
-    clk, 
+    dm_address, 
+    dm_write_data, 
+    dm_write_enable, 
+    dm_read_enable,
     reset, 
-    dm_data.read_data
+    clk, 
+    dm_read_data
 );
 register_file RF(
-    rf_data.read_address1, 
-    rf_data.read_address2, 
-    rf_data.write_address, 
-    rf_data.write_data, 
-    rf_data.write_enable, 
-    rf_data.swap_enable,
-    clk, 
+    rf_read_address1, 
+    rf_read_address2, 
+    rf_write_address, 
+    rf_write_data, 
+    rf_write_enable,
     reset, 
-    rf_data.read_data1, 
-    rf_data.read_data2
+    clk, 
+    rf_read_data1, 
+    rf_read_data2
 );
+
+
 
 always @(posedge clk) begin
     if (reset) state <= init;
     case (state)
         init: begin
+            $display("State: init");
+        
             PC = reset ? 0 : PC;
-            IR = 0;
+            IR = reset ? 0 : 0;
 
-            alu_data.a <= 0;
-            alu_data.b <= 0;
+            // $display("RF read data 1 %b", rf_read_data1);
+            // $display("RF read data 2 %b", rf_read_data2);
+            $display("RF write data %b", rf_write_data);
 
-            rf_data.read_address1 <= 0; 
-            rf_data.read_address2 <= 0;
-            rf_data.write_address <= 0;
-            rf_data.write_data <= 0;
-            rf_data.write_enable <= 0;
-            rf_data.swap_enable <= 0;
+            rf_read_address1 <= 0; 
+            rf_read_address2 <= 0;
+            rf_write_address <= 0;
+            rf_write_data <= 0;
+            rf_write_enable <= 0;
 
-            dm_data.index <= 0;
-            dm_data.write_data <= 0;
-            dm_data.write_enable <= 0;
-            dm_data.read_enable <= 0;
+            dm_address <= 0;
+            dm_write_data <= 0;
+            dm_write_enable <= 0;
+            dm_read_enable <= 0;
 
-            im_data.index <= PC;
-            im_data.new_instruction <= 0;
-            im_data.loading <= 0;
+            im_index <= PC;
+            im_new_instruction <= 0;
+            im_loading <= 0;
             is_executing <= 0;
+            
+            $display("im_out: %b", im_out);
 
             sort_i <= 0;
             sort_j <= 0;
-            is_sort_writing <= 0;
+            sort_condition <= 0;
 
             display_out[0] <= 0;
             display_out[1] <= 0;
@@ -163,25 +143,38 @@ always @(posedge clk) begin
             display_out[3] <= 0;
 
             state <= wait_inst;
+            $display();
+            
         end
         fetch: begin
             if (is_external == 1) begin
                 IR <= external;
             end else begin
-                IR <= im_data.out;
+                IR <= im_out;
                 PC <= PC + 1;
             end
             state <= next_instruction;
+            
+            $display("State: fetch");
+            $display("PC: %b", PC);
+            $display("IR: %b", IR);
         end
         load_external_inst_mem: begin
-            im_data.new_instruction <= external;
-            im_data.loading <= 1;
+            im_new_instruction <= external;
+            im_loading <= 1;
             state <= init;
+            $display("State: load_external_inst_mem");
+            $display("external: %b", external);
         end
         load_external_reg_file: begin
-            rf_data.write_address <= external_reg_file_index;
-            rf_data.write_data <= external_reg_file_data;
+            rf_read_address1 = external_reg_file_index;
+            rf_write_address = external_reg_file_index;
+            rf_write_data = external_reg_file_data;
+            rf_write_enable = 1;
             state <= init;
+            $display("State: load_external_reg_file");
+            $display("external_reg_file_data: %b", external_reg_file_data);
+            $display("external_reg_file_index: %b", external_reg_file_index);
         end
         next_instruction: begin
             case (IR[11:9])
@@ -194,120 +187,156 @@ always @(posedge clk) begin
                 des: state <= reverse_sorting; 
                 default: state <= init;
             endcase
+            $display("State: next_instruction");
+            $display("instruction: %b", IR[11:9]);
         end
         wait_inst: begin
             if (reset == 1) state <= init;
             else if (load_to_inst_mem == 1) state <= load_external_inst_mem;
             else if (load_to_reg_file == 1) state <= load_external_reg_file;
-            else if (next_inst == 1 || is_external == 1) state <= next_instruction;
+            else if (next_inst == 1 || is_external == 1) state <= fetch;
+            // $display("State: wait_inst");
         end
         loading: begin
             if (is_executing == 0) begin
-                dm_data.address <= IR[3:0];
-                dm_data.read_enable <= 1;
+                dm_address <= IR[3:0];
+                dm_read_enable <= 1;
                 is_executing <= 1;
             end else begin
-                rf_data.write_data <= dm_data.read_data;
-                rf_data.write_enable <= 1;
-                rf_data.write_address <= IR[6:4];
+                rf_write_data <= dm_read_data;
+                rf_write_enable <= 1;
+                rf_write_address <= IR[6:4];
                 is_executing <= 0;
                 state <= init;
+                $display("DM address: %b", IR[3:0]);
+                $display("DM read data: %b", dm_read_data);
+                $display("DM write address: %b", IR[6:4]);
             end
+            $display("State: loading");
         end
         storing: begin
-            if (is_executing == 0) begin
-                rf_data.read_address1 <= IR[6:4];
+            $display("State: storing");
+            // $display("is_executing: %b", is_executing);
+            if (is_executing == 0) begin;
+                // $display("IR[6:4]: %b", IR[6:4]);
+                rf_read_address1 <= IR[6:4];
                 is_executing <= 1;
             end else begin
-                dm_data.address <= IR[3:0];
-                dm_data.write_data <= rf_data.read_data1;
-                dm_data.write_enable <= 1;
+                dm_address <= IR[3:0];
+                dm_write_data <= rf_read_data1;
+                dm_write_enable <= 1;
                 is_executing <= 0;
                 state <= init;
+                $display("RF Address: %b", rf_read_address1);
+                $display("RF read data: %b", rf_read_data1);
+                $display("DM address: %b", IR[3:0]);
+                $display("IR: %b", IR);
             end
         end
         addition: begin
             if (is_executing == 0) begin
-                rf_data.read_address1 <= IR[2:0];
-                rf_data.read_address2 <= IR[5:3];
-                rf_data.write_address <= IR[8:6];
+                rf_read_address1 <= IR[2:0];
+                rf_read_address2 <= IR[5:3];
+                rf_write_address <= IR[8:6];
                 is_executing <= 1;
             end else begin
-                rf_data.write_data <= rf_data.read_data2 + rf_data.read_data1;
-                rf_data.write_enable <= 1;
+                rf_write_data <= rf_read_data2 + rf_read_data1;
+                rf_write_enable <= 1;
 
-                display_out[0] <= rf_data.read_data2 + rf_data.read_data1;
+                display_out[0] <= rf_read_data2 + rf_read_data1;
                 display_out[1] <= 0;
-                display_out[2] <= rf_data.read_data2;
-                display_out[3] <= rf_data.read_data1;
+                display_out[2] <= rf_read_data2;
+                display_out[3] <= rf_read_data1;
 
                 is_executing <= 0;
                 state <= init;
             end
+            $display("State: addition");
         end
         subtraction: begin
             if (is_executing == 0) begin
-                rf_data.read_address1 <= IR[2:0];
-                rf_data.read_address2 <= IR[5:3];
-                rf_data.write_address <= IR[8:6];
+                rf_read_address1 <= IR[2:0];
+                rf_read_address2 <= IR[5:3];
+                rf_write_address <= IR[8:6];
                 is_executing <= 1;
             end else begin
-                rf_data.write_data <= rf_data.read_data2 - rf_data.read_data1;
-                rf_data.write_enable <= 1;
+                rf_write_data <= rf_read_data2 - rf_read_data1;
+                rf_write_enable <= 1;
 
-                display_out[0] <= rf_data.read_data2 - rf_data.read_data1;
+                display_out[0] <= rf_read_data2 - rf_read_data1;
                 display_out[1] <= 0;
-                display_out[2] <= rf_data.read_data2;
-                display_out[3] <= rf_data.read_data1;
+                display_out[2] <= rf_read_data2;
+                display_out[3] <= rf_read_data1;
 
                 is_executing <= 0;
                 state <= init;
             end
+            $display("State: subtraction");
         end
-        sorting: begin
+        sorting:begin
+            $display("State: sorting");
             if (is_executing == 0) begin
-                rf_data.read_address1 <= IR[5:3];
-                rf_data.read_address2 <= IR[5:3] + 1;
-                rf_data.write_address <= IR[8:6];
-                rf_data.write_enable <= 1;
+                $display("Sort: begin");
+                rf_read_address1 <= IR[5:3];
+                rf_read_address2 <= IR[5:3] + 1;
+                rf_write_address <= IR[8:6];
+                rf_write_enable <= 1;
                 sort_i <= 0;
                 sort_j <= 0;
                 is_executing <= 1;
-            end else if (is_executing == 1 && is_sort_writing == 0) begin
-                if (rf_data.read_data2 < rf_data.read_data1) begin
-                    temp_sort_mem[sort_j] = rf_data.read_data2;
-                    temp_sort_mem[sort_j + 1] = rf_data.read_data1;
-                end else begin
-                    temp_sort_mem[sort_j + 1] = rf_data.read_data2;
-                    temp_sort_mem[sort_j] = rf_data.read_data1;
+                sort_condition <= 2'b01;
+            end else if (is_executing == 1 && sort_condition == 2'b01) begin 
+                $display("Sort: coppying");
+                temp_sort_mem[sort_i] = rf_read_data1;
+                temp_sort_mem[sort_i + 1] = rf_read_data2;
+
+                sort_i = sort_i + 2;
+
+                if (sort_i >= 8 || sort_i >= IR[2:0]) begin
+                    sort_condition = 2'b10;
+                    sort_i = 0;
+                end
+
+                rf_read_address1 = IR[5:3] + sort_i;
+                rf_read_address2 = IR[5:3] + sort_i + 1;
+            end else if (is_executing == 1 && sort_condition == 2'b10) begin
+                $display("Sort: sorting");
+                $display("rf data 1: %b", rf_read_data1);
+                $display("rf data 2: %b", rf_read_data2);
+                $display("i: %b", sort_i);
+                $display("j: %b", sort_j);
+                if (temp_sort_mem[sort_j + 1] < temp_sort_mem[sort_j]) begin
+                    temp_sort_mem[sort_j] <= temp_sort_mem[sort_j + 1];
+                    temp_sort_mem[sort_j + 1] <= temp_sort_mem[sort_j];
                 end
 
                 sort_j++;
-              if (sort_j == 7 - sort_i || sort_j == IR[2:0]) begin
+                if (sort_j == (7 - sort_i) || sort_j == (IR[2:0] - 1)) begin
                     sort_i++;
                     sort_j = 0;
                 end
 
-                if (sort_i == 7 || sort_i == IR[2:0]) begin
-                   is_sort_writing = 1; 
+                if (sort_i == 7 || sort_i == (IR[2:0] - 1)) begin
+                   sort_condition = 2'b11; 
                    sort_j = 0;
                    sort_i = 0;
                 end
-
-                rf_data.read_address1 = IR[5:3] + sort_j;
-                rf_data.read_address2 = IR[5:3] + sort_j + 1;
             end else begin
-                rf_data.write_data = temp_sort_mem[sort_i];
+                $display("Sort: write");
+                
+                rf_write_data = temp_sort_mem[sort_i];
+                $display("Write address: %b", rf_write_address);
+                $display("Write data: %b", rf_write_data);
 
                 display_out[0] = temp_sort_mem[sort_i];
                 display_out[1] = 0;
                 display_out[2] = 0;
-                display_out[3] = IR[8:6];
+                display_out[3] = IR[2:0];
 
                 temp_sort_mem[sort_i] = 0;
 
+                rf_write_address = IR[8:6] + sort_i;
                 sort_i++;
-                rf_data.write_address = IR[8:6] + sort_i;
                 if (sort_i == 8 || sort_i == IR[2:0]) begin
                     is_executing = 0;
                     state = init;
@@ -315,73 +344,91 @@ always @(posedge clk) begin
             end
         end
         reverse_sorting: begin
+            $display("State: reverse sorting");
             if (is_executing == 0) begin
-                rf_data.read_address1 <= IR[5:3];
-                rf_data.read_address2 <= IR[5:3] + 1;
-                rf_data.write_address <= IR[8:6];
-                rf_data.write_enable <= 1;
+                $display("Sort: begin");
+                rf_read_address1 <= IR[5:3];
+                rf_read_address2 <= IR[5:3] + 1;
+                rf_write_address <= IR[8:6];
+                rf_write_enable <= 1;
                 sort_i <= 0;
                 sort_j <= 0;
                 is_executing <= 1;
-            end else if (is_executing == 1 && is_sort_writing == 0) begin
-                if (rf_data.read_data2 > rf_data.read_data1) begin
-                    temp_sort_mem[sort_j] = rf_data.read_data2;
-                    temp_sort_mem[sort_j + 1] = rf_data.read_data1;
-                end else begin
-                    temp_sort_mem[sort_j + 1] = rf_data.read_data2;
-                    temp_sort_mem[sort_j] = rf_data.read_data1;
+                sort_condition <= 2'b01;
+            end else if (is_executing == 1 && sort_condition == 2'b01) begin 
+                temp_sort_mem[sort_i] = rf_read_data1;
+                temp_sort_mem[sort_i + 1] = rf_read_data2;
+
+                sort_i = sort_i + 2;
+
+                if (sort_i >= 8 || sort_i >= IR[2:0]) begin
+                    sort_condition = 2'b10;
+                    sort_i = 0;
+                end
+
+                rf_read_address1 = IR[5:3] + sort_i;
+                rf_read_address2 = IR[5:3] + sort_i + 1;
+            end else if (is_executing == 1 && sort_condition == 2'b10) begin
+                $display("Sort: sorting");
+                $display("rf data 1: %b", rf_read_data1);
+                $display("rf data 2: %b", rf_read_data2);
+                $display("i: %b", sort_i);
+                $display("j: %b", sort_j);
+                if (temp_sort_mem[sort_j + 1] > temp_sort_mem[sort_j]) begin
+                    temp_sort_mem[sort_j] <= temp_sort_mem[sort_j + 1];
+                    temp_sort_mem[sort_j + 1] <= temp_sort_mem[sort_j];
                 end
 
                 sort_j++;
-              if (sort_j == 7 - sort_i || sort_j == IR[2:0]) begin
+                if (sort_j == (7 - sort_i) || sort_j == (IR[2:0] - 1)) begin
                     sort_i++;
                     sort_j = 0;
                 end
 
-                if (sort_i == 7 || sort_i == IR[2:0]) begin
-                   is_sort_writing = 1; 
+                if (sort_i == 7 || sort_i == (IR[2:0] - 1)) begin
+                   sort_condition = 2'b11; 
                    sort_j = 0;
                    sort_i = 0;
                 end
-
-                rf_data.read_address1 = IR[5:3] + sort_j;
-                rf_data.read_address2 = IR[5:3] + sort_j + 1;
             end else begin
-                rf_data.write_data = temp_sort_mem[sort_i];
-                temp_sort_mem[sort_i] = 0;
+                $display("Sort: write");
+                $display("Write address: %b", rf_write_address);
+                rf_write_data = temp_sort_mem[sort_i];
 
                 display_out[0] = temp_sort_mem[sort_i];
                 display_out[1] = 0;
                 display_out[2] = 0;
-                display_out[3] = IR[8:6];
+                display_out[3] = IR[2:0];
 
+                temp_sort_mem[sort_i] = 0;
+
+                rf_write_address = IR[8:6] + sort_i;
                 sort_i++;
-                rf_data.write_address = IR[8:6] + sort_i;
                 if (sort_i == 8 || sort_i == IR[2:0]) begin
-                   is_executing = 0;
-                   sort_i = 0;
-                   state = init;
+                    is_executing = 0;
+                    state = init;
                 end
             end
         end
         displaying: begin
             if (is_executing == 0) begin
-                rf_data.read_address1 <= IR[5:3];
+                rf_read_address1 <= IR[5:3];
                 is_executing <= 1; 
             end else begin
-                display_out[0] <= rf_data.read_data1;
+                display_out[0] <= rf_read_data1;
                 display_out[1] <= 0;
                 display_out[2] <= 0;
                 display_out[3] <= IR[2:0];
                
                 sort_i <= sort_i + 1;
-                if (sort_i + 1 == IR[2:0]) begin
+                if (sort_i + 1 == IR[2:0] + 1) begin
                    is_executing <= 0; 
                    state <= init;
                 end else begin
-                    rf_data.read_address1 <= IR[5:3] + sort_i + 1;
+                    rf_read_address1 <= IR[5:3] + sort_i + 1;
                 end
             end
+            $display("State: displaying");
         end
         default: state <= init;
     endcase

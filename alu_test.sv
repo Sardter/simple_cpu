@@ -9,9 +9,10 @@ parameter scale = 1;
 
 initial begin
     a = 4'b0000; b = 4'b0000; operation = 0; #scale;
-    a = 4'b1010; b = 4'b0101; #scale;
+    a = 4'b0010; b = 4'b0001; #scale;
     operation = 1; #scale;
     operation = 2; #scale;
+    $finish;
 end
 
 endmodule

@@ -7,10 +7,10 @@ module register_file (
     input reset,
     input clk,
     output logic [3:0] read_data1,
-    output logic [3:0] read_data2,
+    output logic [3:0] read_data2
 );
 
-logic [3:0] slots [7:0];
+logic [3:0] memory [7:0];
 
 logic state = 0;
 
@@ -27,10 +27,11 @@ always @(posedge clk) begin
         memory[7] <= 0;
         state <= 1;
     end else if (write_enable == 1) begin
-        slots[write_address] <= write_data;
+        memory[write_address] <= write_data;
     end
-    read_data1 <= slots[read_address1];
-    read_data2 <= slots[read_address2];
 end
-    
+
+assign read_data1 = memory[read_address1];
+assign read_data2 = memory[read_address2];
+
 endmodule

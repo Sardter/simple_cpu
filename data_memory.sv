@@ -8,11 +8,8 @@ module data_memory (
     output logic [3:0] read_data
 );
 
-typedef struct packed {
-  logic [3:0] value;
-} slot;
+logic [3:0] slots [15:0];
 
-slot [15:0] slots;
 logic state = 0;
 
 always @(posedge clk) begin
@@ -34,11 +31,11 @@ always @(posedge clk) begin
         slots[14] <= 0;
         slots[15] <= 0;
         state <= 1;
-    end else if (read_enable == 1) begin
-        read_data <= slots[address].value;
     end else if (write_enable == 1) begin
-        slots[address].value <= write_data; 
+        slots[address] <= write_data; 
     end
 end
+
+assign read_data = ~read_enable ? 0 : slots[address];
 
 endmodule

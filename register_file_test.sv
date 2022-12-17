@@ -1,13 +1,14 @@
 module register_file_test;
     logic [2:0] read_address1, read_address2, write_address;
-    logic [3:0] write_data, read_data1, read_data2;
+    logic [3:0] write_data;
+    logic [3:0] read_data1, read_data2;
     logic write_enable, clk, reset;
 
-    register_file rf(read_address1, read_address2, write_address, write_address, write_enable, reset, clk, read_data1, read_data2);
+    register_file rf(read_address1, read_address2, write_address, write_data, write_enable, reset, clk, read_data1, read_data2);
 
     initial begin
         clk = 0;
-        forever clk = ~clk; #1;
+        forever #1 clk = ~clk;;
     end
 
     parameter scale = 2;
