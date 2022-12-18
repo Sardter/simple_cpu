@@ -1,0 +1,15 @@
+INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/RYZEN/Desktop/codes/vivado/simple_cpu/simple_cpu.sim/sim_1/impl/func/xsim/basys_man_test_func_impl.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module basys_man
+INFO: [VRFC 10-311] analyzing module clock_divider
+INFO: [VRFC 10-311] analyzing module controller
+INFO: [VRFC 10-311] analyzing module data_memory
+INFO: [VRFC 10-311] analyzing module debouncer
+INFO: [VRFC 10-311] analyzing module debouncer_0
+INFO: [VRFC 10-311] analyzing module debouncer_1
+INFO: [VRFC 10-311] analyzing module debouncer_2
+INFO: [VRFC 10-311] analyzing module debouncer_3
+INFO: [VRFC 10-311] analyzing module instruction_memory
+INFO: [VRFC 10-311] analyzing module register_file
+INFO: [VRFC 10-311] analyzing module glbl
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/RYZEN/Desktop/codes/vivado/simple_cpu/simple_cpu.srcs/sim_1/new/basys_man_test.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module basys_man_test

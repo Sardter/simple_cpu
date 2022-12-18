@@ -1,0 +1,726 @@
+
+*** Running vivado
+    with args -log controller.vds -m64 -product Vivado -mode batch -messageDb vivado.pb -notrace -source controller.tcl
+
+
+****** Vivado v2017.4 (64-bit)
+  **** SW Build 2086221 on Fri Dec 15 20:55:39 MST 2017
+  **** IP Build 2085800 on Fri Dec 15 22:25:07 MST 2017
+    ** Copyright 1986-2017 Xilinx, Inc. All Rights Reserved.
+
+source controller.tcl -notrace
+Command: synth_design -top controller -part xc7a35tcpg236-1
+Starting synth_design
+Attempting to get a license for feature 'Synthesis' and/or device 'xc7a35t'
+INFO: [Common 17-349] Got license for feature 'Synthesis' and/or device 'xc7a35t'
+INFO: Launching helper process for spawning children vivado processes
+INFO: Helper process launched with PID 21108 
+---------------------------------------------------------------------------------
+Starting RTL Elaboration : Time (s): cpu = 00:00:04 ; elapsed = 00:00:05 . Memory (MB): peak = 344.098 ; gain = 100.094
+---------------------------------------------------------------------------------
+INFO: [Synth 8-638] synthesizing module 'controller' [C:/Users/RYZEN/Desktop/codes/vivado/simple_cpu/controller.sv:1]
+	Parameter init bound to: 4'b0000 
+	Parameter fetch bound to: 4'b0001 
+	Parameter load_external_inst_mem bound to: 4'b0010 
+	Parameter next_instruction bound to: 4'b0011 
+	Parameter addition bound to: 4'b0100 
+	Parameter subtraction bound to: 4'b0101 
+	Parameter sorting bound to: 4'b0110 
+	Parameter reverse_sorting bound to: 4'b0111 
+	Parameter loading bound to: 4'b1000 
+	Parameter storing bound to: 4'b1001 
+	Parameter displaying bound to: 4'b1010 
+	Parameter wait_inst bound to: 4'b1011 
+	Parameter load_external_reg_file bound to: 4'b1100 
+	Parameter alu_add bound to: 2'b00 
+	Parameter alu_sub bound to: 2'b01 
+	Parameter alu_com bound to: 2'b10 
+	Parameter loa bound to: 3'b000 
+	Parameter sto bound to: 3'b001 
+	Parameter sub bound to: 3'b010 
+	Parameter add bound to: 3'b011 
+	Parameter asc bound to: 3'b100 
+	Parameter des bound to: 3'b101 
+	Parameter dis bound to: 3'b110 
+INFO: [Synth 8-638] synthesizing module 'instruction_memory' [C:/Users/RYZEN/Desktop/codes/vivado/simple_cpu/instruction_memory.sv:1]
+INFO: [Synth 8-256] done synthesizing module 'instruction_memory' (1#1) [C:/Users/RYZEN/Desktop/codes/vivado/simple_cpu/instruction_memory.sv:1]
+INFO: [Synth 8-638] synthesizing module 'data_memory' [C:/Users/RYZEN/Desktop/codes/vivado/simple_cpu/data_memory.sv:1]
+INFO: [Synth 8-256] done synthesizing module 'data_memory' (2#1) [C:/Users/RYZEN/Desktop/codes/vivado/simple_cpu/data_memory.sv:1]
+INFO: [Synth 8-638] synthesizing module 'register_file' [C:/Users/RYZEN/Desktop/codes/vivado/simple_cpu/register_file.sv:1]
+INFO: [Synth 8-256] done synthesizing module 'register_file' (3#1) [C:/Users/RYZEN/Desktop/codes/vivado/simple_cpu/register_file.sv:1]
+WARNING: [Synth 8-4767] Trying to implement RAM 'temp_sort_mem_reg' in registers. Block RAM or DRAM implementation is not possible; see log for reasons.
+Reason is one or more of the following :
+	1: Invalid write to RAM. 
+	2: Unable to determine number of words or word size in RAM. 
+	3: No valid read/write found for RAM. 
+RAM "temp_sort_mem_reg" dissolved into registers
+
+Warning: Trying to implement RAM in registers. Block RAM or DRAM implementation is not possible for one or more of the following reasons :
+	1: RAM has multiple writes via different ports in same process. If RAM inferencing intended, write to one port per process. 
+	2: Unable to determine number of words or word size in RAM. 
+	3: No valid read/write found for RAM. 
+RAM dissolved into registers
+INFO: [Synth 8-256] done synthesizing module 'controller' (4#1) [C:/Users/RYZEN/Desktop/codes/vivado/simple_cpu/controller.sv:1]
+---------------------------------------------------------------------------------
+Finished RTL Elaboration : Time (s): cpu = 00:00:05 ; elapsed = 00:00:06 . Memory (MB): peak = 397.254 ; gain = 153.250
+---------------------------------------------------------------------------------
+
+Report Check Netlist: 
++------+------------------+-------+---------+-------+------------------+
+|      |Item              |Errors |Warnings |Status |Description       |
++------+------------------+-------+---------+-------+------------------+
+|1     |multi_driven_nets |      0|        0|Passed |Multi driven nets |
++------+------------------+-------+---------+-------+------------------+
+---------------------------------------------------------------------------------
+Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:05 ; elapsed = 00:00:06 . Memory (MB): peak = 397.254 ; gain = 153.250
+---------------------------------------------------------------------------------
+INFO: [Device 21-403] Loading part xc7a35tcpg236-1
+INFO: [Project 1-570] Preparing netlist for logic optimization
+
+Processing XDC Constraints
+Initializing timing engine
+Parsing XDC File [C:/Users/RYZEN/Desktop/codes/vivado/simple_cpu/simple_cpu.srcs/constrs_1/new/basys_constraints.xdc]
+WARNING: [Vivado 12-584] No ports matched 'CLK100MHZ'. [C:/Users/RYZEN/Desktop/codes/vivado/simple_cpu/simple_cpu.srcs/constrs_1/new/basys_constraints.xdc:1]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/RYZEN/Desktop/codes/vivado/simple_cpu/simple_cpu.srcs/constrs_1/new/basys_constraints.xdc:1]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'CLK100MHZ'. [C:/Users/RYZEN/Desktop/codes/vivado/simple_cpu/simple_cpu.srcs/constrs_1/new/basys_constraints.xdc:2]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/RYZEN/Desktop/codes/vivado/simple_cpu/simple_cpu.srcs/constrs_1/new/basys_constraints.xdc:2]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'CLK100MHZ'. [C:/Users/RYZEN/Desktop/codes/vivado/simple_cpu/simple_cpu.srcs/constrs_1/new/basys_constraints.xdc:3]
+CRITICAL WARNING: [Vivado 12-4739] create_clock:No valid object(s) found for '-objects [get_ports CLK100MHZ]'. [C:/Users/RYZEN/Desktop/codes/vivado/simple_cpu/simple_cpu.srcs/constrs_1/new/basys_constraints.xdc:3]
+Resolution: Check if the specified object(s) exists in the current design. If it does, ensure that the correct design hierarchy was specified for the object. If you are working with clocks, make sure create_clock was used to create the clock object before it is referenced.
+WARNING: [Vivado 12-584] No ports matched 'sw[0]'. [C:/Users/RYZEN/Desktop/codes/vivado/simple_cpu/simple_cpu.srcs/constrs_1/new/basys_constraints.xdc:6]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/RYZEN/Desktop/codes/vivado/simple_cpu/simple_cpu.srcs/constrs_1/new/basys_constraints.xdc:6]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'sw[0]'. [C:/Users/RYZEN/Desktop/codes/vivado/simple_cpu/simple_cpu.srcs/constrs_1/new/basys_constraints.xdc:7]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/RYZEN/Desktop/codes/vivado/simple_cpu/simple_cpu.srcs/constrs_1/new/basys_constraints.xdc:7]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'sw[1]'. [C:/Users/RYZEN/Desktop/codes/vivado/simple_cpu/simple_cpu.srcs/constrs_1/new/basys_constraints.xdc:8]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/RYZEN/Desktop/codes/vivado/simple_cpu/simple_cpu.srcs/constrs_1/new/basys_constraints.xdc:8]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'sw[1]'. [C:/Users/RYZEN/Desktop/codes/vivado/simple_cpu/simple_cpu.srcs/constrs_1/new/basys_constraints.xdc:9]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/RYZEN/Desktop/codes/vivado/simple_cpu/simple_cpu.srcs/constrs_1/new/basys_constraints.xdc:9]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'sw[2]'. [C:/Users/RYZEN/Desktop/codes/vivado/simple_cpu/simple_cpu.srcs/constrs_1/new/basys_constraints.xdc:10]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/RYZEN/Desktop/codes/vivado/simple_cpu/simple_cpu.srcs/constrs_1/new/basys_constraints.xdc:10]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'sw[2]'. [C:/Users/RYZEN/Desktop/codes/vivado/simple_cpu/simple_cpu.srcs/constrs_1/new/basys_constraints.xdc:11]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/RYZEN/Desktop/codes/vivado/simple_cpu/simple_cpu.srcs/constrs_1/new/basys_constraints.xdc:11]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'sw[3]'. [C:/Users/RYZEN/Desktop/codes/vivado/simple_cpu/simple_cpu.srcs/constrs_1/new/basys_constraints.xdc:12]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/RYZEN/Desktop/codes/vivado/simple_cpu/simple_cpu.srcs/constrs_1/new/basys_constraints.xdc:12]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'sw[3]'. [C:/Users/RYZEN/Desktop/codes/vivado/simple_cpu/simple_cpu.srcs/constrs_1/new/basys_constraints.xdc:13]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/RYZEN/Desktop/codes/vivado/simple_cpu/simple_cpu.srcs/constrs_1/new/basys_constraints.xdc:13]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'sw[4]'. [C:/Users/RYZEN/Desktop/codes/vivado/simple_cpu/simple_cpu.srcs/constrs_1/new/basys_constraints.xdc:14]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/RYZEN/Desktop/codes/vivado/simple_cpu/simple_cpu.srcs/constrs_1/new/basys_constraints.xdc:14]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'sw[4]'. [C:/Users/RYZEN/Desktop/codes/vivado/simple_cpu/simple_cpu.srcs/constrs_1/new/basys_constraints.xdc:15]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/RYZEN/Desktop/codes/vivado/simple_cpu/simple_cpu.srcs/constrs_1/new/basys_constraints.xdc:15]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'sw[5]'. [C:/Users/RYZEN/Desktop/codes/vivado/simple_cpu/simple_cpu.srcs/constrs_1/new/basys_constraints.xdc:16]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/RYZEN/Desktop/codes/vivado/simple_cpu/simple_cpu.srcs/constrs_1/new/basys_constraints.xdc:16]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'sw[5]'. [C:/Users/RYZEN/Desktop/codes/vivado/simple_cpu/simple_cpu.srcs/constrs_1/new/basys_constraints.xdc:17]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/RYZEN/Desktop/codes/vivado/simple_cpu/simple_cpu.srcs/constrs_1/new/basys_constraints.xdc:17]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'sw[6]'. [C:/Users/RYZEN/Desktop/codes/vivado/simple_cpu/simple_cpu.srcs/constrs_1/new/basys_constraints.xdc:18]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/RYZEN/Desktop/codes/vivado/simple_cpu/simple_cpu.srcs/constrs_1/new/basys_constraints.xdc:18]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'sw[6]'. [C:/Users/RYZEN/Desktop/codes/vivado/simple_cpu/simple_cpu.srcs/constrs_1/new/basys_constraints.xdc:19]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/RYZEN/Desktop/codes/vivado/simple_cpu/simple_cpu.srcs/constrs_1/new/basys_constraints.xdc:19]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'sw[7]'. [C:/Users/RYZEN/Desktop/codes/vivado/simple_cpu/simple_cpu.srcs/constrs_1/new/basys_constraints.xdc:20]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/RYZEN/Desktop/codes/vivado/simple_cpu/simple_cpu.srcs/constrs_1/new/basys_constraints.xdc:20]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'sw[7]'. [C:/Users/RYZEN/Desktop/codes/vivado/simple_cpu/simple_cpu.srcs/constrs_1/new/basys_constraints.xdc:21]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/RYZEN/Desktop/codes/vivado/simple_cpu/simple_cpu.srcs/constrs_1/new/basys_constraints.xdc:21]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'sw[8]'. [C:/Users/RYZEN/Desktop/codes/vivado/simple_cpu/simple_cpu.srcs/constrs_1/new/basys_constraints.xdc:22]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/RYZEN/Desktop/codes/vivado/simple_cpu/simple_cpu.srcs/constrs_1/new/basys_constraints.xdc:22]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'sw[8]'. [C:/Users/RYZEN/Desktop/codes/vivado/simple_cpu/simple_cpu.srcs/constrs_1/new/basys_constraints.xdc:23]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/RYZEN/Desktop/codes/vivado/simple_cpu/simple_cpu.srcs/constrs_1/new/basys_constraints.xdc:23]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'sw[9]'. [C:/Users/RYZEN/Desktop/codes/vivado/simple_cpu/simple_cpu.srcs/constrs_1/new/basys_constraints.xdc:24]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/RYZEN/Desktop/codes/vivado/simple_cpu/simple_cpu.srcs/constrs_1/new/basys_constraints.xdc:24]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'sw[9]'. [C:/Users/RYZEN/Desktop/codes/vivado/simple_cpu/simple_cpu.srcs/constrs_1/new/basys_constraints.xdc:25]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/RYZEN/Desktop/codes/vivado/simple_cpu/simple_cpu.srcs/constrs_1/new/basys_constraints.xdc:25]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'sw[10]'. [C:/Users/RYZEN/Desktop/codes/vivado/simple_cpu/simple_cpu.srcs/constrs_1/new/basys_constraints.xdc:26]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/RYZEN/Desktop/codes/vivado/simple_cpu/simple_cpu.srcs/constrs_1/new/basys_constraints.xdc:26]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'sw[10]'. [C:/Users/RYZEN/Desktop/codes/vivado/simple_cpu/simple_cpu.srcs/constrs_1/new/basys_constraints.xdc:27]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/RYZEN/Desktop/codes/vivado/simple_cpu/simple_cpu.srcs/constrs_1/new/basys_constraints.xdc:27]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'sw[11]'. [C:/Users/RYZEN/Desktop/codes/vivado/simple_cpu/simple_cpu.srcs/constrs_1/new/basys_constraints.xdc:28]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/RYZEN/Desktop/codes/vivado/simple_cpu/simple_cpu.srcs/constrs_1/new/basys_constraints.xdc:28]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'sw[11]'. [C:/Users/RYZEN/Desktop/codes/vivado/simple_cpu/simple_cpu.srcs/constrs_1/new/basys_constraints.xdc:29]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/RYZEN/Desktop/codes/vivado/simple_cpu/simple_cpu.srcs/constrs_1/new/basys_constraints.xdc:29]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'sw[12]'. [C:/Users/RYZEN/Desktop/codes/vivado/simple_cpu/simple_cpu.srcs/constrs_1/new/basys_constraints.xdc:30]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/RYZEN/Desktop/codes/vivado/simple_cpu/simple_cpu.srcs/constrs_1/new/basys_constraints.xdc:30]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'sw[12]'. [C:/Users/RYZEN/Desktop/codes/vivado/simple_cpu/simple_cpu.srcs/constrs_1/new/basys_constraints.xdc:31]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/RYZEN/Desktop/codes/vivado/simple_cpu/simple_cpu.srcs/constrs_1/new/basys_constraints.xdc:31]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'sw[13]'. [C:/Users/RYZEN/Desktop/codes/vivado/simple_cpu/simple_cpu.srcs/constrs_1/new/basys_constraints.xdc:32]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/RYZEN/Desktop/codes/vivado/simple_cpu/simple_cpu.srcs/constrs_1/new/basys_constraints.xdc:32]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'sw[13]'. [C:/Users/RYZEN/Desktop/codes/vivado/simple_cpu/simple_cpu.srcs/constrs_1/new/basys_constraints.xdc:33]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/RYZEN/Desktop/codes/vivado/simple_cpu/simple_cpu.srcs/constrs_1/new/basys_constraints.xdc:33]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'sw[14]'. [C:/Users/RYZEN/Desktop/codes/vivado/simple_cpu/simple_cpu.srcs/constrs_1/new/basys_constraints.xdc:34]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/RYZEN/Desktop/codes/vivado/simple_cpu/simple_cpu.srcs/constrs_1/new/basys_constraints.xdc:34]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'sw[14]'. [C:/Users/RYZEN/Desktop/codes/vivado/simple_cpu/simple_cpu.srcs/constrs_1/new/basys_constraints.xdc:35]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/RYZEN/Desktop/codes/vivado/simple_cpu/simple_cpu.srcs/constrs_1/new/basys_constraints.xdc:35]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'sw[15]'. [C:/Users/RYZEN/Desktop/codes/vivado/simple_cpu/simple_cpu.srcs/constrs_1/new/basys_constraints.xdc:36]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/RYZEN/Desktop/codes/vivado/simple_cpu/simple_cpu.srcs/constrs_1/new/basys_constraints.xdc:36]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'sw[15]'. [C:/Users/RYZEN/Desktop/codes/vivado/simple_cpu/simple_cpu.srcs/constrs_1/new/basys_constraints.xdc:37]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/RYZEN/Desktop/codes/vivado/simple_cpu/simple_cpu.srcs/constrs_1/new/basys_constraints.xdc:37]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'seg[0]'. [C:/Users/RYZEN/Desktop/codes/vivado/simple_cpu/simple_cpu.srcs/constrs_1/new/basys_constraints.xdc:41]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/RYZEN/Desktop/codes/vivado/simple_cpu/simple_cpu.srcs/constrs_1/new/basys_constraints.xdc:41]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'seg[0]'. [C:/Users/RYZEN/Desktop/codes/vivado/simple_cpu/simple_cpu.srcs/constrs_1/new/basys_constraints.xdc:42]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/RYZEN/Desktop/codes/vivado/simple_cpu/simple_cpu.srcs/constrs_1/new/basys_constraints.xdc:42]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'seg[1]'. [C:/Users/RYZEN/Desktop/codes/vivado/simple_cpu/simple_cpu.srcs/constrs_1/new/basys_constraints.xdc:43]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/RYZEN/Desktop/codes/vivado/simple_cpu/simple_cpu.srcs/constrs_1/new/basys_constraints.xdc:43]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'seg[1]'. [C:/Users/RYZEN/Desktop/codes/vivado/simple_cpu/simple_cpu.srcs/constrs_1/new/basys_constraints.xdc:44]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/RYZEN/Desktop/codes/vivado/simple_cpu/simple_cpu.srcs/constrs_1/new/basys_constraints.xdc:44]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'seg[2]'. [C:/Users/RYZEN/Desktop/codes/vivado/simple_cpu/simple_cpu.srcs/constrs_1/new/basys_constraints.xdc:45]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/RYZEN/Desktop/codes/vivado/simple_cpu/simple_cpu.srcs/constrs_1/new/basys_constraints.xdc:45]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'seg[2]'. [C:/Users/RYZEN/Desktop/codes/vivado/simple_cpu/simple_cpu.srcs/constrs_1/new/basys_constraints.xdc:46]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/RYZEN/Desktop/codes/vivado/simple_cpu/simple_cpu.srcs/constrs_1/new/basys_constraints.xdc:46]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'seg[3]'. [C:/Users/RYZEN/Desktop/codes/vivado/simple_cpu/simple_cpu.srcs/constrs_1/new/basys_constraints.xdc:47]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/RYZEN/Desktop/codes/vivado/simple_cpu/simple_cpu.srcs/constrs_1/new/basys_constraints.xdc:47]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'seg[3]'. [C:/Users/RYZEN/Desktop/codes/vivado/simple_cpu/simple_cpu.srcs/constrs_1/new/basys_constraints.xdc:48]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/RYZEN/Desktop/codes/vivado/simple_cpu/simple_cpu.srcs/constrs_1/new/basys_constraints.xdc:48]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'seg[4]'. [C:/Users/RYZEN/Desktop/codes/vivado/simple_cpu/simple_cpu.srcs/constrs_1/new/basys_constraints.xdc:49]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/RYZEN/Desktop/codes/vivado/simple_cpu/simple_cpu.srcs/constrs_1/new/basys_constraints.xdc:49]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'seg[4]'. [C:/Users/RYZEN/Desktop/codes/vivado/simple_cpu/simple_cpu.srcs/constrs_1/new/basys_constraints.xdc:50]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/RYZEN/Desktop/codes/vivado/simple_cpu/simple_cpu.srcs/constrs_1/new/basys_constraints.xdc:50]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'seg[5]'. [C:/Users/RYZEN/Desktop/codes/vivado/simple_cpu/simple_cpu.srcs/constrs_1/new/basys_constraints.xdc:51]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/RYZEN/Desktop/codes/vivado/simple_cpu/simple_cpu.srcs/constrs_1/new/basys_constraints.xdc:51]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'seg[5]'. [C:/Users/RYZEN/Desktop/codes/vivado/simple_cpu/simple_cpu.srcs/constrs_1/new/basys_constraints.xdc:52]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/RYZEN/Desktop/codes/vivado/simple_cpu/simple_cpu.srcs/constrs_1/new/basys_constraints.xdc:52]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'seg[6]'. [C:/Users/RYZEN/Desktop/codes/vivado/simple_cpu/simple_cpu.srcs/constrs_1/new/basys_constraints.xdc:53]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/RYZEN/Desktop/codes/vivado/simple_cpu/simple_cpu.srcs/constrs_1/new/basys_constraints.xdc:53]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'seg[6]'. [C:/Users/RYZEN/Desktop/codes/vivado/simple_cpu/simple_cpu.srcs/constrs_1/new/basys_constraints.xdc:54]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/RYZEN/Desktop/codes/vivado/simple_cpu/simple_cpu.srcs/constrs_1/new/basys_constraints.xdc:54]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'an[0]'. [C:/Users/RYZEN/Desktop/codes/vivado/simple_cpu/simple_cpu.srcs/constrs_1/new/basys_constraints.xdc:56]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/RYZEN/Desktop/codes/vivado/simple_cpu/simple_cpu.srcs/constrs_1/new/basys_constraints.xdc:56]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'an[0]'. [C:/Users/RYZEN/Desktop/codes/vivado/simple_cpu/simple_cpu.srcs/constrs_1/new/basys_constraints.xdc:57]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/RYZEN/Desktop/codes/vivado/simple_cpu/simple_cpu.srcs/constrs_1/new/basys_constraints.xdc:57]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'an[1]'. [C:/Users/RYZEN/Desktop/codes/vivado/simple_cpu/simple_cpu.srcs/constrs_1/new/basys_constraints.xdc:58]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/RYZEN/Desktop/codes/vivado/simple_cpu/simple_cpu.srcs/constrs_1/new/basys_constraints.xdc:58]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'an[1]'. [C:/Users/RYZEN/Desktop/codes/vivado/simple_cpu/simple_cpu.srcs/constrs_1/new/basys_constraints.xdc:59]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/RYZEN/Desktop/codes/vivado/simple_cpu/simple_cpu.srcs/constrs_1/new/basys_constraints.xdc:59]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'an[2]'. [C:/Users/RYZEN/Desktop/codes/vivado/simple_cpu/simple_cpu.srcs/constrs_1/new/basys_constraints.xdc:60]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/RYZEN/Desktop/codes/vivado/simple_cpu/simple_cpu.srcs/constrs_1/new/basys_constraints.xdc:60]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'an[2]'. [C:/Users/RYZEN/Desktop/codes/vivado/simple_cpu/simple_cpu.srcs/constrs_1/new/basys_constraints.xdc:61]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/RYZEN/Desktop/codes/vivado/simple_cpu/simple_cpu.srcs/constrs_1/new/basys_constraints.xdc:61]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'an[3]'. [C:/Users/RYZEN/Desktop/codes/vivado/simple_cpu/simple_cpu.srcs/constrs_1/new/basys_constraints.xdc:62]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/RYZEN/Desktop/codes/vivado/simple_cpu/simple_cpu.srcs/constrs_1/new/basys_constraints.xdc:62]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'an[3]'. [C:/Users/RYZEN/Desktop/codes/vivado/simple_cpu/simple_cpu.srcs/constrs_1/new/basys_constraints.xdc:63]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/RYZEN/Desktop/codes/vivado/simple_cpu/simple_cpu.srcs/constrs_1/new/basys_constraints.xdc:63]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'LED[0]'. [C:/Users/RYZEN/Desktop/codes/vivado/simple_cpu/simple_cpu.srcs/constrs_1/new/basys_constraints.xdc:66]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/RYZEN/Desktop/codes/vivado/simple_cpu/simple_cpu.srcs/constrs_1/new/basys_constraints.xdc:66]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'LED[0]'. [C:/Users/RYZEN/Desktop/codes/vivado/simple_cpu/simple_cpu.srcs/constrs_1/new/basys_constraints.xdc:67]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/RYZEN/Desktop/codes/vivado/simple_cpu/simple_cpu.srcs/constrs_1/new/basys_constraints.xdc:67]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'LED[1]'. [C:/Users/RYZEN/Desktop/codes/vivado/simple_cpu/simple_cpu.srcs/constrs_1/new/basys_constraints.xdc:68]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/RYZEN/Desktop/codes/vivado/simple_cpu/simple_cpu.srcs/constrs_1/new/basys_constraints.xdc:68]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'LED[1]'. [C:/Users/RYZEN/Desktop/codes/vivado/simple_cpu/simple_cpu.srcs/constrs_1/new/basys_constraints.xdc:69]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/RYZEN/Desktop/codes/vivado/simple_cpu/simple_cpu.srcs/constrs_1/new/basys_constraints.xdc:69]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'LED[2]'. [C:/Users/RYZEN/Desktop/codes/vivado/simple_cpu/simple_cpu.srcs/constrs_1/new/basys_constraints.xdc:70]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/RYZEN/Desktop/codes/vivado/simple_cpu/simple_cpu.srcs/constrs_1/new/basys_constraints.xdc:70]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'LED[2]'. [C:/Users/RYZEN/Desktop/codes/vivado/simple_cpu/simple_cpu.srcs/constrs_1/new/basys_constraints.xdc:71]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/RYZEN/Desktop/codes/vivado/simple_cpu/simple_cpu.srcs/constrs_1/new/basys_constraints.xdc:71]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'LED[3]'. [C:/Users/RYZEN/Desktop/codes/vivado/simple_cpu/simple_cpu.srcs/constrs_1/new/basys_constraints.xdc:72]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/RYZEN/Desktop/codes/vivado/simple_cpu/simple_cpu.srcs/constrs_1/new/basys_constraints.xdc:72]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'LED[3]'. [C:/Users/RYZEN/Desktop/codes/vivado/simple_cpu/simple_cpu.srcs/constrs_1/new/basys_constraints.xdc:73]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/RYZEN/Desktop/codes/vivado/simple_cpu/simple_cpu.srcs/constrs_1/new/basys_constraints.xdc:73]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'LED[4]'. [C:/Users/RYZEN/Desktop/codes/vivado/simple_cpu/simple_cpu.srcs/constrs_1/new/basys_constraints.xdc:74]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/RYZEN/Desktop/codes/vivado/simple_cpu/simple_cpu.srcs/constrs_1/new/basys_constraints.xdc:74]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'LED[4]'. [C:/Users/RYZEN/Desktop/codes/vivado/simple_cpu/simple_cpu.srcs/constrs_1/new/basys_constraints.xdc:75]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/RYZEN/Desktop/codes/vivado/simple_cpu/simple_cpu.srcs/constrs_1/new/basys_constraints.xdc:75]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'LED[5]'. [C:/Users/RYZEN/Desktop/codes/vivado/simple_cpu/simple_cpu.srcs/constrs_1/new/basys_constraints.xdc:76]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/RYZEN/Desktop/codes/vivado/simple_cpu/simple_cpu.srcs/constrs_1/new/basys_constraints.xdc:76]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'LED[5]'. [C:/Users/RYZEN/Desktop/codes/vivado/simple_cpu/simple_cpu.srcs/constrs_1/new/basys_constraints.xdc:77]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/RYZEN/Desktop/codes/vivado/simple_cpu/simple_cpu.srcs/constrs_1/new/basys_constraints.xdc:77]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'LED[6]'. [C:/Users/RYZEN/Desktop/codes/vivado/simple_cpu/simple_cpu.srcs/constrs_1/new/basys_constraints.xdc:78]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/RYZEN/Desktop/codes/vivado/simple_cpu/simple_cpu.srcs/constrs_1/new/basys_constraints.xdc:78]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'LED[6]'. [C:/Users/RYZEN/Desktop/codes/vivado/simple_cpu/simple_cpu.srcs/constrs_1/new/basys_constraints.xdc:79]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/RYZEN/Desktop/codes/vivado/simple_cpu/simple_cpu.srcs/constrs_1/new/basys_constraints.xdc:79]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'LED[7]'. [C:/Users/RYZEN/Desktop/codes/vivado/simple_cpu/simple_cpu.srcs/constrs_1/new/basys_constraints.xdc:80]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/RYZEN/Desktop/codes/vivado/simple_cpu/simple_cpu.srcs/constrs_1/new/basys_constraints.xdc:80]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'LED[7]'. [C:/Users/RYZEN/Desktop/codes/vivado/simple_cpu/simple_cpu.srcs/constrs_1/new/basys_constraints.xdc:81]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/RYZEN/Desktop/codes/vivado/simple_cpu/simple_cpu.srcs/constrs_1/new/basys_constraints.xdc:81]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'LED[8]'. [C:/Users/RYZEN/Desktop/codes/vivado/simple_cpu/simple_cpu.srcs/constrs_1/new/basys_constraints.xdc:82]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/RYZEN/Desktop/codes/vivado/simple_cpu/simple_cpu.srcs/constrs_1/new/basys_constraints.xdc:82]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'LED[8]'. [C:/Users/RYZEN/Desktop/codes/vivado/simple_cpu/simple_cpu.srcs/constrs_1/new/basys_constraints.xdc:83]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/RYZEN/Desktop/codes/vivado/simple_cpu/simple_cpu.srcs/constrs_1/new/basys_constraints.xdc:83]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'LED[9]'. [C:/Users/RYZEN/Desktop/codes/vivado/simple_cpu/simple_cpu.srcs/constrs_1/new/basys_constraints.xdc:84]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/RYZEN/Desktop/codes/vivado/simple_cpu/simple_cpu.srcs/constrs_1/new/basys_constraints.xdc:84]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'LED[9]'. [C:/Users/RYZEN/Desktop/codes/vivado/simple_cpu/simple_cpu.srcs/constrs_1/new/basys_constraints.xdc:85]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/RYZEN/Desktop/codes/vivado/simple_cpu/simple_cpu.srcs/constrs_1/new/basys_constraints.xdc:85]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'LED[10]'. [C:/Users/RYZEN/Desktop/codes/vivado/simple_cpu/simple_cpu.srcs/constrs_1/new/basys_constraints.xdc:86]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/RYZEN/Desktop/codes/vivado/simple_cpu/simple_cpu.srcs/constrs_1/new/basys_constraints.xdc:86]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'LED[10]'. [C:/Users/RYZEN/Desktop/codes/vivado/simple_cpu/simple_cpu.srcs/constrs_1/new/basys_constraints.xdc:87]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/RYZEN/Desktop/codes/vivado/simple_cpu/simple_cpu.srcs/constrs_1/new/basys_constraints.xdc:87]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'LED[11]'. [C:/Users/RYZEN/Desktop/codes/vivado/simple_cpu/simple_cpu.srcs/constrs_1/new/basys_constraints.xdc:88]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/RYZEN/Desktop/codes/vivado/simple_cpu/simple_cpu.srcs/constrs_1/new/basys_constraints.xdc:88]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'LED[11]'. [C:/Users/RYZEN/Desktop/codes/vivado/simple_cpu/simple_cpu.srcs/constrs_1/new/basys_constraints.xdc:89]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/RYZEN/Desktop/codes/vivado/simple_cpu/simple_cpu.srcs/constrs_1/new/basys_constraints.xdc:89]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'LED[12]'. [C:/Users/RYZEN/Desktop/codes/vivado/simple_cpu/simple_cpu.srcs/constrs_1/new/basys_constraints.xdc:90]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/RYZEN/Desktop/codes/vivado/simple_cpu/simple_cpu.srcs/constrs_1/new/basys_constraints.xdc:90]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'LED[12]'. [C:/Users/RYZEN/Desktop/codes/vivado/simple_cpu/simple_cpu.srcs/constrs_1/new/basys_constraints.xdc:91]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/RYZEN/Desktop/codes/vivado/simple_cpu/simple_cpu.srcs/constrs_1/new/basys_constraints.xdc:91]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'LED[13]'. [C:/Users/RYZEN/Desktop/codes/vivado/simple_cpu/simple_cpu.srcs/constrs_1/new/basys_constraints.xdc:92]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/RYZEN/Desktop/codes/vivado/simple_cpu/simple_cpu.srcs/constrs_1/new/basys_constraints.xdc:92]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'LED[13]'. [C:/Users/RYZEN/Desktop/codes/vivado/simple_cpu/simple_cpu.srcs/constrs_1/new/basys_constraints.xdc:93]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/RYZEN/Desktop/codes/vivado/simple_cpu/simple_cpu.srcs/constrs_1/new/basys_constraints.xdc:93]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'LED[14]'. [C:/Users/RYZEN/Desktop/codes/vivado/simple_cpu/simple_cpu.srcs/constrs_1/new/basys_constraints.xdc:94]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/RYZEN/Desktop/codes/vivado/simple_cpu/simple_cpu.srcs/constrs_1/new/basys_constraints.xdc:94]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'LED[14]'. [C:/Users/RYZEN/Desktop/codes/vivado/simple_cpu/simple_cpu.srcs/constrs_1/new/basys_constraints.xdc:95]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/RYZEN/Desktop/codes/vivado/simple_cpu/simple_cpu.srcs/constrs_1/new/basys_constraints.xdc:95]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'LED[15]'. [C:/Users/RYZEN/Desktop/codes/vivado/simple_cpu/simple_cpu.srcs/constrs_1/new/basys_constraints.xdc:96]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/RYZEN/Desktop/codes/vivado/simple_cpu/simple_cpu.srcs/constrs_1/new/basys_constraints.xdc:96]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'LED[15]'. [C:/Users/RYZEN/Desktop/codes/vivado/simple_cpu/simple_cpu.srcs/constrs_1/new/basys_constraints.xdc:97]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/RYZEN/Desktop/codes/vivado/simple_cpu/simple_cpu.srcs/constrs_1/new/basys_constraints.xdc:97]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'btnC'. [C:/Users/RYZEN/Desktop/codes/vivado/simple_cpu/simple_cpu.srcs/constrs_1/new/basys_constraints.xdc:100]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/RYZEN/Desktop/codes/vivado/simple_cpu/simple_cpu.srcs/constrs_1/new/basys_constraints.xdc:100]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'btnC'. [C:/Users/RYZEN/Desktop/codes/vivado/simple_cpu/simple_cpu.srcs/constrs_1/new/basys_constraints.xdc:101]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/RYZEN/Desktop/codes/vivado/simple_cpu/simple_cpu.srcs/constrs_1/new/basys_constraints.xdc:101]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'btnU'. [C:/Users/RYZEN/Desktop/codes/vivado/simple_cpu/simple_cpu.srcs/constrs_1/new/basys_constraints.xdc:102]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/RYZEN/Desktop/codes/vivado/simple_cpu/simple_cpu.srcs/constrs_1/new/basys_constraints.xdc:102]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'btnU'. [C:/Users/RYZEN/Desktop/codes/vivado/simple_cpu/simple_cpu.srcs/constrs_1/new/basys_constraints.xdc:103]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/RYZEN/Desktop/codes/vivado/simple_cpu/simple_cpu.srcs/constrs_1/new/basys_constraints.xdc:103]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'btnL'. [C:/Users/RYZEN/Desktop/codes/vivado/simple_cpu/simple_cpu.srcs/constrs_1/new/basys_constraints.xdc:104]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/RYZEN/Desktop/codes/vivado/simple_cpu/simple_cpu.srcs/constrs_1/new/basys_constraints.xdc:104]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'btnL'. [C:/Users/RYZEN/Desktop/codes/vivado/simple_cpu/simple_cpu.srcs/constrs_1/new/basys_constraints.xdc:105]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/RYZEN/Desktop/codes/vivado/simple_cpu/simple_cpu.srcs/constrs_1/new/basys_constraints.xdc:105]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'btnR'. [C:/Users/RYZEN/Desktop/codes/vivado/simple_cpu/simple_cpu.srcs/constrs_1/new/basys_constraints.xdc:106]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/RYZEN/Desktop/codes/vivado/simple_cpu/simple_cpu.srcs/constrs_1/new/basys_constraints.xdc:106]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'btnR'. [C:/Users/RYZEN/Desktop/codes/vivado/simple_cpu/simple_cpu.srcs/constrs_1/new/basys_constraints.xdc:107]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/RYZEN/Desktop/codes/vivado/simple_cpu/simple_cpu.srcs/constrs_1/new/basys_constraints.xdc:107]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'btnD'. [C:/Users/RYZEN/Desktop/codes/vivado/simple_cpu/simple_cpu.srcs/constrs_1/new/basys_constraints.xdc:108]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/RYZEN/Desktop/codes/vivado/simple_cpu/simple_cpu.srcs/constrs_1/new/basys_constraints.xdc:108]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'btnD'. [C:/Users/RYZEN/Desktop/codes/vivado/simple_cpu/simple_cpu.srcs/constrs_1/new/basys_constraints.xdc:109]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/RYZEN/Desktop/codes/vivado/simple_cpu/simple_cpu.srcs/constrs_1/new/basys_constraints.xdc:109]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+Finished Parsing XDC File [C:/Users/RYZEN/Desktop/codes/vivado/simple_cpu/simple_cpu.srcs/constrs_1/new/basys_constraints.xdc]
+Completed Processing XDC Constraints
+
+INFO: [Project 1-111] Unisim Transformation Summary:
+No Unisim elements were transformed.
+
+Constraint Validation Runtime : Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.005 . Memory (MB): peak = 732.473 ; gain = 0.000
+---------------------------------------------------------------------------------
+Finished Constraint Validation : Time (s): cpu = 00:00:14 ; elapsed = 00:00:16 . Memory (MB): peak = 732.473 ; gain = 488.469
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Loading Part and Timing Information
+---------------------------------------------------------------------------------
+Loading part: xc7a35tcpg236-1
+---------------------------------------------------------------------------------
+Finished Loading Part and Timing Information : Time (s): cpu = 00:00:14 ; elapsed = 00:00:16 . Memory (MB): peak = 732.473 ; gain = 488.469
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Applying 'set_property' XDC Constraints
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:14 ; elapsed = 00:00:16 . Memory (MB): peak = 732.473 ; gain = 488.469
+---------------------------------------------------------------------------------
+INFO: [Synth 8-5544] ROM "memory_reg[7]" won't be mapped to Block RAM because address size (3) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "memory_reg[6]" won't be mapped to Block RAM because address size (3) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "memory_reg[5]" won't be mapped to Block RAM because address size (3) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "memory_reg[4]" won't be mapped to Block RAM because address size (3) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "memory_reg[3]" won't be mapped to Block RAM because address size (3) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "memory_reg[2]" won't be mapped to Block RAM because address size (3) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "memory_reg[1]" won't be mapped to Block RAM because address size (3) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "memory_reg[0]" won't be mapped to Block RAM because address size (3) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "slots_reg[15]" won't be mapped to Block RAM because address size (4) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "slots_reg[14]" won't be mapped to Block RAM because address size (4) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "slots_reg[13]" won't be mapped to Block RAM because address size (4) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "slots_reg[12]" won't be mapped to Block RAM because address size (4) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "slots_reg[11]" won't be mapped to Block RAM because address size (4) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "slots_reg[10]" won't be mapped to Block RAM because address size (4) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "slots_reg[9]" won't be mapped to Block RAM because address size (4) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "slots_reg[8]" won't be mapped to Block RAM because address size (4) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "slots_reg[7]" won't be mapped to Block RAM because address size (4) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "slots_reg[6]" won't be mapped to Block RAM because address size (4) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "slots_reg[5]" won't be mapped to Block RAM because address size (4) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "slots_reg[4]" won't be mapped to Block RAM because address size (4) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "slots_reg[3]" won't be mapped to Block RAM because address size (4) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "slots_reg[2]" won't be mapped to Block RAM because address size (4) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "slots_reg[1]" won't be mapped to Block RAM because address size (4) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "slots_reg[0]" won't be mapped to Block RAM because address size (4) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "memory_reg[7]" won't be mapped to Block RAM because address size (3) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "memory_reg[6]" won't be mapped to Block RAM because address size (3) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "memory_reg[5]" won't be mapped to Block RAM because address size (3) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "memory_reg[4]" won't be mapped to Block RAM because address size (3) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "memory_reg[3]" won't be mapped to Block RAM because address size (3) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "memory_reg[2]" won't be mapped to Block RAM because address size (3) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "memory_reg[1]" won't be mapped to Block RAM because address size (3) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "memory_reg[0]" won't be mapped to Block RAM because address size (3) smaller than threshold (5)
+---------------------------------------------------------------------------------
+Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:15 ; elapsed = 00:00:17 . Memory (MB): peak = 732.473 ; gain = 488.469
+---------------------------------------------------------------------------------
+
+Report RTL Partitions: 
++-+--------------+------------+----------+
+| |RTL Partition |Replication |Instances |
++-+--------------+------------+----------+
++-+--------------+------------+----------+
+---------------------------------------------------------------------------------
+Start RTL Component Statistics 
+---------------------------------------------------------------------------------
+Detailed RTL Component Info : 
++---Adders : 
+	   2 Input     32 Bit       Adders := 1     
+	   2 Input      4 Bit       Adders := 3     
+	   3 Input      4 Bit       Adders := 1     
+	   2 Input      3 Bit       Adders := 7     
+	   3 Input      3 Bit       Adders := 2     
++---Registers : 
+	               12 Bit    Registers := 10    
+	                4 Bit    Registers := 40    
+	                3 Bit    Registers := 7     
+	                2 Bit    Registers := 1     
+	                1 Bit    Registers := 9     
++---Muxes : 
+	  18 Input     32 Bit        Muxes := 1     
+	   2 Input     32 Bit        Muxes := 8     
+	   2 Input     12 Bit        Muxes := 17    
+	  14 Input     12 Bit        Muxes := 2     
+	   2 Input      4 Bit        Muxes := 43    
+	   8 Input      4 Bit        Muxes := 1     
+	   4 Input      4 Bit        Muxes := 1     
+	  14 Input      4 Bit        Muxes := 10    
+	   3 Input      4 Bit        Muxes := 8     
+	   5 Input      4 Bit        Muxes := 1     
+	   2 Input      3 Bit        Muxes := 26    
+	  14 Input      3 Bit        Muxes := 7     
+	   5 Input      3 Bit        Muxes := 14    
+	  14 Input      2 Bit        Muxes := 1     
+	   2 Input      2 Bit        Muxes := 1     
+	   4 Input      2 Bit        Muxes := 1     
+	   2 Input      1 Bit        Muxes := 66    
+	  14 Input      1 Bit        Muxes := 29    
+	  15 Input      1 Bit        Muxes := 1     
+	   5 Input      1 Bit        Muxes := 1     
+---------------------------------------------------------------------------------
+Finished RTL Component Statistics 
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start RTL Hierarchical Component Statistics 
+---------------------------------------------------------------------------------
+Hierarchical RTL Component report 
+Module controller 
+Detailed RTL Component Info : 
++---Adders : 
+	   2 Input     32 Bit       Adders := 1     
+	   2 Input      4 Bit       Adders := 3     
+	   3 Input      4 Bit       Adders := 1     
+	   2 Input      3 Bit       Adders := 7     
+	   3 Input      3 Bit       Adders := 2     
++---Registers : 
+	               12 Bit    Registers := 2     
+	                4 Bit    Registers := 16    
+	                3 Bit    Registers := 7     
+	                2 Bit    Registers := 1     
+	                1 Bit    Registers := 6     
++---Muxes : 
+	  18 Input     32 Bit        Muxes := 1     
+	   2 Input     32 Bit        Muxes := 8     
+	  14 Input     12 Bit        Muxes := 2     
+	   2 Input     12 Bit        Muxes := 1     
+	   8 Input      4 Bit        Muxes := 1     
+	   4 Input      4 Bit        Muxes := 1     
+	   2 Input      4 Bit        Muxes := 42    
+	  14 Input      4 Bit        Muxes := 10    
+	   3 Input      4 Bit        Muxes := 8     
+	   5 Input      4 Bit        Muxes := 1     
+	   2 Input      3 Bit        Muxes := 26    
+	  14 Input      3 Bit        Muxes := 7     
+	   5 Input      3 Bit        Muxes := 14    
+	  14 Input      2 Bit        Muxes := 1     
+	   2 Input      2 Bit        Muxes := 1     
+	   4 Input      2 Bit        Muxes := 1     
+	   2 Input      1 Bit        Muxes := 18    
+	  14 Input      1 Bit        Muxes := 29    
+	  15 Input      1 Bit        Muxes := 1     
+	   5 Input      1 Bit        Muxes := 1     
+Module instruction_memory 
+Detailed RTL Component Info : 
++---Registers : 
+	               12 Bit    Registers := 8     
+	                1 Bit    Registers := 1     
++---Muxes : 
+	   2 Input     12 Bit        Muxes := 16    
+	   2 Input      1 Bit        Muxes := 24    
+Module data_memory 
+Detailed RTL Component Info : 
++---Registers : 
+	                4 Bit    Registers := 16    
+	                1 Bit    Registers := 1     
++---Muxes : 
+	   2 Input      4 Bit        Muxes := 1     
+	   2 Input      1 Bit        Muxes := 16    
+Module register_file 
+Detailed RTL Component Info : 
++---Registers : 
+	                4 Bit    Registers := 8     
+	                1 Bit    Registers := 1     
++---Muxes : 
+	   2 Input      1 Bit        Muxes := 8     
+---------------------------------------------------------------------------------
+Finished RTL Hierarchical Component Statistics
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Part Resource Summary
+---------------------------------------------------------------------------------
+Part Resources:
+DSPs: 90 (col length:60)
+BRAMs: 100 (col length: RAMB18 60 RAMB36 30)
+---------------------------------------------------------------------------------
+Finished Part Resource Summary
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Cross Boundary and Area Optimization
+---------------------------------------------------------------------------------
+INFO: [Synth 8-3886] merging instance 'display_out_reg[1][0]' (FDE) to 'display_out_reg[1][1]'
+INFO: [Synth 8-3886] merging instance 'display_out_reg[1][1]' (FDE) to 'display_out_reg[1][2]'
+INFO: [Synth 8-3886] merging instance 'display_out_reg[1][2]' (FDE) to 'display_out_reg[1][3]'
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\display_out_reg[1][3] )
+WARNING: [Synth 8-3332] Sequential element (display_out_reg[1][3]) is unused and will be removed from module controller.
+---------------------------------------------------------------------------------
+Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:21 ; elapsed = 00:00:23 . Memory (MB): peak = 732.473 ; gain = 488.469
+---------------------------------------------------------------------------------
+
+Report RTL Partitions: 
++-+--------------+------------+----------+
+| |RTL Partition |Replication |Instances |
++-+--------------+------------+----------+
++-+--------------+------------+----------+
+---------------------------------------------------------------------------------
+Start Applying XDC Timing Constraints
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Applying XDC Timing Constraints : Time (s): cpu = 00:00:29 ; elapsed = 00:00:31 . Memory (MB): peak = 754.898 ; gain = 510.895
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Timing Optimization
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Timing Optimization : Time (s): cpu = 00:00:29 ; elapsed = 00:00:31 . Memory (MB): peak = 755.418 ; gain = 511.414
+---------------------------------------------------------------------------------
+
+Report RTL Partitions: 
++-+--------------+------------+----------+
+| |RTL Partition |Replication |Instances |
++-+--------------+------------+----------+
++-+--------------+------------+----------+
+---------------------------------------------------------------------------------
+Start Technology Mapping
+---------------------------------------------------------------------------------
+INFO: [Synth 8-3886] merging instance 'DM/state_reg' (FDSE) to 'IM/state_reg'
+INFO: [Synth 8-3886] merging instance 'IM/state_reg' (FDSE) to 'RF/state_reg'
+---------------------------------------------------------------------------------
+Finished Technology Mapping : Time (s): cpu = 00:00:29 ; elapsed = 00:00:31 . Memory (MB): peak = 788.840 ; gain = 544.836
+---------------------------------------------------------------------------------
+
+Report RTL Partitions: 
++-+--------------+------------+----------+
+| |RTL Partition |Replication |Instances |
++-+--------------+------------+----------+
++-+--------------+------------+----------+
+---------------------------------------------------------------------------------
+Start IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished IO Insertion : Time (s): cpu = 00:00:29 ; elapsed = 00:00:32 . Memory (MB): peak = 788.840 ; gain = 544.836
+---------------------------------------------------------------------------------
+
+Report Check Netlist: 
++------+------------------+-------+---------+-------+------------------+
+|      |Item              |Errors |Warnings |Status |Description       |
++------+------------------+-------+---------+-------+------------------+
+|1     |multi_driven_nets |      0|        0|Passed |Multi driven nets |
++------+------------------+-------+---------+-------+------------------+
+---------------------------------------------------------------------------------
+Start Renaming Generated Instances
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Instances : Time (s): cpu = 00:00:30 ; elapsed = 00:00:32 . Memory (MB): peak = 788.840 ; gain = 544.836
+---------------------------------------------------------------------------------
+
+Report RTL Partitions: 
++-+--------------+------------+----------+
+| |RTL Partition |Replication |Instances |
++-+--------------+------------+----------+
++-+--------------+------------+----------+
+---------------------------------------------------------------------------------
+Start Rebuilding User Hierarchy
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Rebuilding User Hierarchy : Time (s): cpu = 00:00:30 ; elapsed = 00:00:32 . Memory (MB): peak = 788.840 ; gain = 544.836
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Ports
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Ports : Time (s): cpu = 00:00:30 ; elapsed = 00:00:32 . Memory (MB): peak = 788.840 ; gain = 544.836
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Handling Custom Attributes
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:30 ; elapsed = 00:00:32 . Memory (MB): peak = 788.840 ; gain = 544.836
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Nets
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Nets : Time (s): cpu = 00:00:30 ; elapsed = 00:00:32 . Memory (MB): peak = 788.840 ; gain = 544.836
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Writing Synthesis Report
+---------------------------------------------------------------------------------
+
+Report BlackBoxes: 
++-+--------------+----------+
+| |BlackBox name |Instances |
++-+--------------+----------+
++-+--------------+----------+
+
+Report Cell Usage: 
++------+-------+------+
+|      |Cell   |Count |
++------+-------+------+
+|1     |BUFG   |     1|
+|2     |CARRY4 |     6|
+|3     |LUT2   |    47|
+|4     |LUT3   |    66|
+|5     |LUT4   |    44|
+|6     |LUT5   |    79|
+|7     |LUT6   |   293|
+|8     |MUXF7  |    18|
+|9     |MUXF8  |     4|
+|10    |FDRE   |   306|
+|11    |IBUF   |    25|
+|12    |OBUF   |    17|
++------+-------+------+
+
+Report Instance Areas: 
++------+---------+-------------------+------+
+|      |Instance |Module             |Cells |
++------+---------+-------------------+------+
+|1     |top      |                   |   906|
+|2     |  DM     |data_memory        |   110|
+|3     |  IM     |instruction_memory |   132|
+|4     |  RF     |register_file      |   213|
++------+---------+-------------------+------+
+---------------------------------------------------------------------------------
+Finished Writing Synthesis Report : Time (s): cpu = 00:00:30 ; elapsed = 00:00:32 . Memory (MB): peak = 788.840 ; gain = 544.836
+---------------------------------------------------------------------------------
+Synthesis finished with 0 errors, 0 critical warnings and 1 warnings.
+Synthesis Optimization Runtime : Time (s): cpu = 00:00:20 ; elapsed = 00:00:26 . Memory (MB): peak = 788.840 ; gain = 209.617
+Synthesis Optimization Complete : Time (s): cpu = 00:00:30 ; elapsed = 00:00:32 . Memory (MB): peak = 788.840 ; gain = 544.836
+INFO: [Project 1-571] Translating synthesized netlist
+INFO: [Netlist 29-17] Analyzing 53 Unisim elements for replacement
+INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
+INFO: [Project 1-570] Preparing netlist for logic optimization
+INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
+INFO: [Project 1-111] Unisim Transformation Summary:
+No Unisim elements were transformed.
+
+INFO: [Common 17-83] Releasing license: Synthesis
+57 Infos, 101 Warnings, 99 Critical Warnings and 0 Errors encountered.
+synth_design completed successfully
+synth_design: Time (s): cpu = 00:00:32 ; elapsed = 00:00:35 . Memory (MB): peak = 788.840 ; gain = 557.895
+INFO: [Common 17-1381] The checkpoint 'C:/Users/RYZEN/Desktop/codes/vivado/simple_cpu/simple_cpu.runs/synth_1/controller.dcp' has been generated.
+INFO: [runtcl-4] Executing : report_utilization -file controller_utilization_synth.rpt -pb controller_utilization_synth.pb
+report_utilization: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.027 . Memory (MB): peak = 788.840 ; gain = 0.000
+INFO: [Common 17-206] Exiting Vivado at Sun Dec 18 12:23:42 2022...

@@ -22,7 +22,7 @@ initial begin
     end
 
     for (int i = 0; i < 8; i++) begin
-        // index = i;
+        index = i;
         new_instruction = i;
         load = 1;
         #scale;

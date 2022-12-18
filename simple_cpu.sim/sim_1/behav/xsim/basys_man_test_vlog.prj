@@ -1,0 +1,14 @@
+# compile verilog/system verilog design source files
+sv xil_defaultlib  --include "C:/Xilinx/Vivado/2017.4/data/xilinx_vip/include" \
+"../../../../simple_cpu.srcs/sources_1/new/basys_man.sv" \
+"../../../../controller.sv" \
+"../../../../data_memory.sv" \
+"../../../../instruction_memory.sv" \
+"../../../../register_file.sv" \
+"../../../../simple_cpu.srcs/sim_1/new/basys_man_test.sv" \
+
+# compile glbl module
+verilog xil_defaultlib "glbl.v"
+
+# Do not sort compile order
+nosort

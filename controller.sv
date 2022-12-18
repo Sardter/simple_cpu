@@ -8,7 +8,8 @@ module controller (
     input next_inst,
     input clk,
     input reset,
-    output logic [3:0] display_out [3:0]
+    output logic [3:0] display_out [3:0],
+    output logic new_out
 );
 
 logic [2:0] PC = 0;
@@ -141,6 +142,7 @@ always @(posedge clk) begin
             display_out[1] <= 0;
             display_out[2] <= 0;
             display_out[3] <= 0;
+            new_out <= 0;
 
             state <= wait_inst;
             $display();
@@ -158,13 +160,16 @@ always @(posedge clk) begin
             $display("State: fetch");
             $display("PC: %b", PC);
             $display("IR: %b", IR);
+            $display("External: %b", is_external);
         end
         load_external_inst_mem: begin
             im_new_instruction <= external;
             im_loading <= 1;
+            im_index <= external_reg_file_data[3:1];
             state <= init;
             $display("State: load_external_inst_mem");
             $display("external: %b", external);
+            $display("index: %b", external_reg_file_data[3:1]);
         end
         load_external_reg_file: begin
             rf_read_address1 = external_reg_file_index;
@@ -195,7 +200,8 @@ always @(posedge clk) begin
             else if (load_to_inst_mem == 1) state <= load_external_inst_mem;
             else if (load_to_reg_file == 1) state <= load_external_reg_file;
             else if (next_inst == 1 || is_external == 1) state <= fetch;
-            // $display("State: wait_inst");
+            //$display("State: wait_inst");
+            
         end
         loading: begin
             if (is_executing == 0) begin
@@ -247,6 +253,7 @@ always @(posedge clk) begin
                 display_out[1] <= 0;
                 display_out[2] <= rf_read_data2;
                 display_out[3] <= rf_read_data1;
+                new_out <= 1;
 
                 is_executing <= 0;
                 state <= init;
@@ -267,6 +274,7 @@ always @(posedge clk) begin
                 display_out[1] <= 0;
                 display_out[2] <= rf_read_data2;
                 display_out[3] <= rf_read_data1;
+                new_out <= 1;
 
                 is_executing <= 0;
                 state <= init;
@@ -332,6 +340,7 @@ always @(posedge clk) begin
                 display_out[1] = 0;
                 display_out[2] = 0;
                 display_out[3] = IR[2:0];
+                new_out <= 1;
 
                 temp_sort_mem[sort_i] = 0;
 
@@ -399,6 +408,7 @@ always @(posedge clk) begin
                 display_out[1] = 0;
                 display_out[2] = 0;
                 display_out[3] = IR[2:0];
+                new_out <= 1;
 
                 temp_sort_mem[sort_i] = 0;
 
@@ -419,6 +429,7 @@ always @(posedge clk) begin
                 display_out[1] <= 0;
                 display_out[2] <= 0;
                 display_out[3] <= IR[2:0];
+                new_out <= 1;
                
                 sort_i <= sort_i + 1;
                 if (sort_i + 1 == IR[2:0] + 1) begin

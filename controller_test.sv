@@ -4,10 +4,11 @@ logic [11:0] external;
 logic [3:0] external_reg_file_data;
 logic [2:0] external_reg_file_index;
 logic [3:0] display_out [3:0];
+logic new_out;
 logic is_external, load_to_inst_mem, load_to_reg_file, next_inst, clk, reset;
 
 controller c(external, external_reg_file_data, external_reg_file_index, is_external, 
-    load_to_inst_mem, load_to_reg_file, next_inst, clk, reset, display_out);
+    load_to_inst_mem, load_to_reg_file, next_inst, clk, reset, display_out, new_out);
 
 initial begin
     clk = 0;
@@ -26,21 +27,21 @@ initial begin
     load_to_reg_file = 0; #scale; 
 
     load_to_inst_mem = 1;
-    external = 12'b001000000000; #scale;
-    external = 12'b001000010001; #scale;
-    external = 12'b000000100000; #scale;
-    external = 12'b011011001000; #scale;
-    external = 12'b010100011010; #scale;
-    external = 12'b100101000011; #scale;
-    external = 12'b101001001110; #scale;
-    external = 12'b110000000111; #scale;
+    external = 12'b001_000_000_000; #scale;
+    external = 12'b001_000_010_001; #scale;
+    external = 12'b000_000_100_000; #scale;
+    external = 12'b011_011_001_000; #scale;
+    external = 12'b010_100_011_010; #scale;
+    external = 12'b100_101_000_011; #scale;
+    external = 12'b101_001_001_110; #scale;
+    external = 12'b110_000_000_111; #scale;
     load_to_inst_mem = 0; #scale;
     
     for (int i = 0; i < 8; i++) begin 
         next_inst = 1; #scale; next_inst = 0; #scale2;
     end
     
-    $finish;
+    //$finish;
 end
 
 endmodule
