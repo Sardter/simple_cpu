@@ -1,6 +1,0 @@
-0.6
-2017.4
-Dec 15 2017
-21:07:18
-C:/Users/RYZEN/Desktop/codes/vivado/simple_cpu/simple_cpu.sim/sim_1/impl/func/xsim/basys_man_test_func_impl.v,1671321346,verilog,,,,basys_man;clock_divider;controller;data_memory;debouncer;debouncer_0;debouncer_1;debouncer_2;debouncer_3;glbl;instruction_memory;register_file,,xil_defaultlib,C:/Xilinx/Vivado/2017.4/data/xilinx_vip/include,,,,,
-C:/Users/RYZEN/Desktop/codes/vivado/simple_cpu/simple_cpu.srcs/sim_1/new/basys_man_test.sv,1671321338,systemVerilog,,,,basys_man_test,,xil_defaultlib,C:/Xilinx/Vivado/2017.4/data/xilinx_vip/include,,,,,

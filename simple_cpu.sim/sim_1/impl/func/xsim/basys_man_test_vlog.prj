@@ -1,9 +1,0 @@
-# compile verilog/system verilog design source files
-verilog xil_defaultlib  --include "C:/Xilinx/Vivado/2017.4/data/xilinx_vip/include" \
-"basys_man_test_func_impl.v" \
-
-sv xil_defaultlib  --include "C:/Xilinx/Vivado/2017.4/data/xilinx_vip/include" \
-"../../../../../simple_cpu.srcs/sim_1/new/basys_man_test.sv" \
-
-# Do not sort compile order
-nosort

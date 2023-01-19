@@ -1,4 +1,0 @@
-Running: xsim.dir/basys_man_test_func_impl/xsimk.exe -simmode gui -wdb basys_man_test_func_impl.wdb -simrunnum 0 -socket 52225
-Design successfully loaded
-Design Loading Memory Usage: 13428 KB (Peak: 13428 KB)
-Design Loading CPU Usage: 15 ms
