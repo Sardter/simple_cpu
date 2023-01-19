@@ -7,4 +7,4 @@ This is a simple proccessor that is written in verilog that runs on the basys 3 
   - Substract
   - Accending Sort
   - Desscending Sort
-  - Disply
+  - Display
